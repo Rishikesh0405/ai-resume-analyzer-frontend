@@ -49,17 +49,29 @@ It helps candidates improve their resumes before applying for jobs.
 
 # 📸 Screenshots
 
-> Add screenshots here after uploading them.
+>## 📸 Screenshots
 
-Example:
+### 🏠 Home Page
 
-```
-screenshots/home.png
-screenshots/upload.png
-screenshots/report.png
-```
+![Home](screenshots/home.png)
 
 ---
+
+### 📤 Upload Resume
+
+![Upload](screenshots/upload.png)
+
+---
+
+### 📊 AI Analysis Report
+
+![Analysis](screenshots/analysis.png)
+
+---
+
+### 📈 ATS Compatibility Audit
+
+![ATS](screenshots/ats.png)
 
 # 🛠 Tech Stack
 
