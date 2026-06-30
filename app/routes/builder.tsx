@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { getGeminiApiKey } from "../lib/gemini";
-import { analyzeTextResumeWithGemini } from "../lib/gemini";
 import { saveAnalysis } from "../lib/puter";
 import type { ResumeAnalysis } from "../../types";
 
@@ -169,11 +167,6 @@ export const ResumeBuilderPage: React.FC = () => {
     e.preventDefault();
     setError(null);
 
-    const apiKey = getGeminiApiKey();
-    if (!apiKey) {
-      setError("Google Gemini API Key is missing. Please create a .env file in the project root containing VITE_GEMINI_API_KEY=your_api_key and restart the development server.");
-      return;
-    }
     if (!jobTitle.trim()) {
       setError("Please specify the Target Job Title.");
       return;
@@ -193,12 +186,23 @@ export const ResumeBuilderPage: React.FC = () => {
       const resumeText = compileResumeText();
 
       setAnalysisStep("Evaluating against job constraints using Gemini 2.0 Flash...");
-      const aiResponse = await analyzeTextResumeWithGemini(
-        resumeText,
-        jobTitle,
-        companyName,
-        jobDescription
-      );
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyze`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    resumeText,
+    jobTitle,
+    companyName,
+  }),
+});
+
+if (!response.ok) {
+  throw new Error("Failed to analyze resume");
+}
+
+const aiResponse = await response.json();
 
       setAnalysisStep("Saving analysis to Puter cloud database...");
       const user = await window.puter.auth.getUser();
@@ -401,7 +405,7 @@ export const ResumeBuilderPage: React.FC = () => {
                 </button>
               </div>
 
-              <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
+              <div className="space-y-4 max-h-75 overflow-y-auto pr-2">
                 {experiences.map((exp) => (
                   <div key={exp.id} className="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-3 relative">
                     <button

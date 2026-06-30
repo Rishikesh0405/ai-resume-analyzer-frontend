@@ -33,8 +33,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden">
       {/* Decorative gradients */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[300px] h-[300px] rounded-full bg-purple-500/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-75 h-75 rounded-full bg-purple-500/5 blur-[100px] pointer-events-none" />
 
       {/* Hero Section */}
       <section className="relative pt-16 pb-16 md:pt-28 md:pb-24">
@@ -44,7 +44,7 @@ export const HomePage: React.FC = () => {
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight md:leading-none">
             Get Your Resume{" "}
-            <span className="bg-gradient-to-r from-indigo-550 via-purple-500 to-indigo-650 bg-gradient-to-r from-indigo-600 to-indigo-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-indigo-550 via-purple-500 to-indigo-650 from-indigo-600 to-indigo-500 bg-clip-text text-transparent">
               ATS Score
             </span>{" "}
             Instantly
